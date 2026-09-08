@@ -15,10 +15,10 @@ class Solution:
         z = 0
         
         for i in range(len(weights)-1):
-            z = np.dot(a, weights[i]) + biases[i]
+            z = a @ weights[i] + biases[i]
             a = np.maximum(0, z)
 
         #output 
-        y_pred = np.dot(a, weights[-1]) + biases[-1]
+        y_pred = a @ weights[-1] + biases[-1]
 
         return np.round(y_pred, 5)
