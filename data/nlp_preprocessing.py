@@ -24,7 +24,9 @@ class Solution:
 
         tensors = []
         for sen in positive+negative:
-            encoded = [float(mapping[word]) for word in sen.split()]
+            encoded = []
+            for word in sen.split():
+                encoded.append(float(mapping[word]))
             tensors.append(torch.tensor(encoded))
 
         return nn.utils.rnn.pad_sequence(tensors, batch_first=True)
