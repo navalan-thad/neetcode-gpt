@@ -11,20 +11,27 @@ class Solution:
         # 4. Pad shorter sequences with 0s using nn.utils.rnn.pad_sequence(tensors, batch_first=True)
         
         vocab = set()
-        for pos in positive:
-            for word in pos.split():
-                vocab.add(word) 
+        for pos_sentence in positive:
+            for word in pos_sentence.split():
+                vocab.add(word)
 
-        for neg in negative:
-            for word in neg.split():
-                vocab.add(word) 
+        for neg_sentence in negative:
+            for word in neg_sentence.split():
+                vocab.add(word)
 
         sorted_vocab = sorted(vocab)
         mapping = {word: i+1 for i, word in enumerate(sorted_vocab)}
 
         tensors = []
-        for sentence in positive+negative:
-            encoded = [float(mapping[word]) for word in sentence.split()]
-            tensors.append(torch.Tensor(encoded))
+        for sen in positive+negative:
+            encoded = [float(mapping[word]) for word in sen.split()]
+            tensors.append(torch.tensor(encoded))
 
         return nn.utils.rnn.pad_sequence(tensors, batch_first=True)
+
+
+
+
+
+            
+
